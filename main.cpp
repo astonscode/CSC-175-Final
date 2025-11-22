@@ -47,7 +47,8 @@ int main()
    return 0;
 }
 
-void MainMenu()
+//switch case main menu
+/*void MainMenu()
 {
    bool continueGame = true;
 
@@ -56,12 +57,25 @@ void MainMenu()
 
       //create display menu function for here
       int option;
-      cout<<"Welcome to Blackjack!\n"
-        "Please choose from the options below"<<endl;
-      cout<<"1. Play Game\n"
-            "2. Directions\n"
-            "3. Hi-Scores\n"
-            "4. Exit\n";
+      cout <<  "Welcome to" << endl;
+      cout << R"($$$$$$$\   $$\                     $$\                                $$\)" << endl;
+      cout << R"($$  __$$\  $$ |                    $$ |                               $$ |)" << endl;
+      cout << R"($$ |  $$ | $$ | $$$$$$\   $$$$$$$\ $$ |  $$\  $$\  $$$$$$\   $$$$$$$\ $$ |  $$\)" << endl;
+      cout << R"($$$$$$$\ | $$ | \____$$\ $$  _____|$$ | $$ | \__| \____$$\ $$  _____| $$ | $$ |)" << endl;
+      cout << R"($$  __$$\  $$ | $$$$$$$ |$$ /      $$$$$$ /  $$\\  $$$$$$$ |$$ /      $$$$$$ /)" << endl;
+      cout << R"($$ |  $$ | $$ |$$  __$$ |$$ |      $$  _$$<   $$ |$$  __$$ |$$ |      $$  _$$<)" << endl;
+      cout << R"($$$$$$$  | $$ |\$$$$$$$ |\$$$$$$$\ $$ | \$$\  $$ |\$$$$$$$ |\$$$$$$$\ $$ | \$$\)" << endl;
+      cout << R"(\_______/  \__| \_______| \_______|\__|  \__| $$ | \_______| \_______|\__|  \__|)" << endl;
+      cout << R"(          By: Aston, Matt, & Sky       $$\    $$ |)" << endl;
+      cout << R"(                                        \$$$$$$  |)" << endl;
+      cout << R"(                                         \______/)" << endl;
+      cout << endl;
+      cout <<  "                   Please choose from the options below"<<endl;
+      cout<<   "                              1. Play Game\n"
+               "                              2. Directions\n"
+               "                              3. Hi-Scores\n"
+               "                              4. Exit\n";
+      cout << endl << endl;
 
       cin>>option;
 
@@ -94,7 +108,91 @@ void MainMenu()
       }
    }
    cout<<"Thank you for playing. Goodbye!";
+}*/
+
+//if then main menu
+void MainMenu()
+{
+   bool continueGame = true;
+   int menuPlace = 5;
+
+   while (continueGame)
+   {
+if (menuPlace == 5) {
+   //create display menu function for here
+   cout <<  "Welcome to" << endl;
+   cout << R"($$$$$$$\   $$\                     $$\                                $$\)" << endl;
+   cout << R"($$  __$$\  $$ |                    $$ |                               $$ |)" << endl;
+   cout << R"($$ |  $$ | $$ | $$$$$$\   $$$$$$$\ $$ |  $$\  $$\  $$$$$$\   $$$$$$$\ $$ |  $$\)" << endl;
+   cout << R"($$$$$$$\ | $$ | \____$$\ $$  _____|$$ | $$ | \__| \____$$\ $$  _____| $$ | $$ |)" << endl;
+   cout << R"($$  __$$\  $$ | $$$$$$$ |$$ /      $$$$$$ /  $$\\  $$$$$$$ |$$ /      $$$$$$ /)" << endl;
+   cout << R"($$ |  $$ | $$ |$$  __$$ |$$ |      $$  _$$<   $$ |$$  __$$ |$$ |      $$  _$$<)" << endl;
+   cout << R"($$$$$$$  | $$ |\$$$$$$$ |\$$$$$$$\ $$ | \$$\  $$ |\$$$$$$$ |\$$$$$$$\ $$ | \$$\)" << endl;
+   cout << R"(\_______/  \__| \_______| \_______|\__|  \__| $$ | \_______| \_______|\__|  \__|)" << endl;
+   cout << R"(          By: Aston, Matt, & Sky       $$\    $$ |)" << endl;
+   cout << R"(                                        \$$$$$$  |)" << endl;
+   cout << R"(                                         \______/)" << endl;
+   cout << endl;
+   cout <<  "                   Please choose from the options below"<<endl;
+   cout<<   "                              1. Play Game\n"
+            "                              2. Directions\n"
+            "                              3. Hi-Scores\n"
+            "                              4. Quit Game\n";
+   cout << endl << endl;
+
+   cin >> menuPlace;
+
+} else if (menuPlace == 1) {
+   //Play Game
+   Gameplay();
+   continueGame = false;
+
+} else if (menuPlace == 2) {
+   //Directions
+   cout<<"This is how you play the game!\n\n";
+   //Insert Directions display function
+   cout <<  "                   Please choose from the options below"<<endl;
+   cout<<   "                              1. Play Game\n"
+            "                              2. Directions\n"
+            "                              3. Hi-Scores\n"
+            "                              4. Quit Game\n"
+            "                              5. Main Menu\n";
+
+   cin >> menuPlace;
+
+
+} else if (menuPlace == 3) {
+   //Hi-Scores
+   cout<<"Hi Scores!\n\n";
+   //Insert Hi-scores display function
+   cout <<  "                   Please choose from the options below"<<endl;
+   cout<<   "                              1. Play Game\n"
+            "                              2. Directions\n"
+            "                              3. Hi-Scores\n"
+            "                              4. Quit Game\n"
+            "                              5. Main Menu\n";
+
+   cin >> menuPlace;
+
+} else if (menuPlace == 4) {
+   continueGame = false;
+
+} else{
+         cout<<"Invalid choice.\n";
+   cout <<  "                   Please choose from the options below"<<endl;
+   cout<<   "                              1. Play Game\n"
+            "                              2. Directions\n"
+            "                              3. Hi-Scores\n"
+            "                              4. Quit Game\n"
+            "                              5. Main Menu\n";
+
+   cin >> menuPlace;
+      }
+   }
+   cout<<"Thank you for playing. Goodbye!";
 }
+
+
 
 void createDeck()
 {
