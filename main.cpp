@@ -47,70 +47,9 @@ int main()
    return 0;
 }
 
-//switch case main menu
-/*void MainMenu()
-{
-   bool continueGame = true;
-
-   while (continueGame)
-   {
-
-      //create display menu function for here
-      int option;
-      cout <<  "Welcome to" << endl;
-      cout << R"($$$$$$$\   $$\                     $$\                                $$\)" << endl;
-      cout << R"($$  __$$\  $$ |                    $$ |                               $$ |)" << endl;
-      cout << R"($$ |  $$ | $$ | $$$$$$\   $$$$$$$\ $$ |  $$\  $$\  $$$$$$\   $$$$$$$\ $$ |  $$\)" << endl;
-      cout << R"($$$$$$$\ | $$ | \____$$\ $$  _____|$$ | $$ | \__| \____$$\ $$  _____| $$ | $$ |)" << endl;
-      cout << R"($$  __$$\  $$ | $$$$$$$ |$$ /      $$$$$$ /  $$\\  $$$$$$$ |$$ /      $$$$$$ /)" << endl;
-      cout << R"($$ |  $$ | $$ |$$  __$$ |$$ |      $$  _$$<   $$ |$$  __$$ |$$ |      $$  _$$<)" << endl;
-      cout << R"($$$$$$$  | $$ |\$$$$$$$ |\$$$$$$$\ $$ | \$$\  $$ |\$$$$$$$ |\$$$$$$$\ $$ | \$$\)" << endl;
-      cout << R"(\_______/  \__| \_______| \_______|\__|  \__| $$ | \_______| \_______|\__|  \__|)" << endl;
-      cout << R"(          By: Aston, Matt, & Sky       $$\    $$ |)" << endl;
-      cout << R"(                                        \$$$$$$  |)" << endl;
-      cout << R"(                                         \______/)" << endl;
-      cout << endl;
-      cout <<  "                   Please choose from the options below"<<endl;
-      cout<<   "                              1. Play Game\n"
-               "                              2. Directions\n"
-               "                              3. Hi-Scores\n"
-               "                              4. Exit\n";
-      cout << endl << endl;
-
-      cin>>option;
-
-      switch(option)
-      {
-
-      case 1:
-         //Play Game
-         Gameplay();
-
-         break;
-      case 2:
-         //Directions
-         cout<<"This is how you play the game!\n\n";
-         //Insert Directions display function
-         break;
-      case 3:
-         //Hi-Scores
-         cout<<"Hi Scores!\n\n";
-         //Insert Hi-scores display function
-         break;
-      case 4:
-         continueGame = false;
-         break;
-      default:
-         cout<<"Invalid choice.\n";
-         break;
-
-
-      }
-   }
-   cout<<"Thank you for playing. Goodbye!";
-}*/
-
-//if then main menu
+/********************************************/
+/*                 MENUS                    */
+/********************************************/
 void MainMenu()
 {
    bool continueGame = true;
@@ -119,7 +58,7 @@ void MainMenu()
    while (continueGame)
    {
 if (menuPlace == 5) {
-   //create display menu function for here
+   //MAIN MENU
    cout <<  "Welcome to" << endl;
    cout << R"($$$$$$$\   $$\                     $$\                                $$\)" << endl;
    cout << R"($$  __$$\  $$ |                    $$ |                               $$ |)" << endl;
@@ -143,14 +82,42 @@ if (menuPlace == 5) {
    cin >> menuPlace;
 
 } else if (menuPlace == 1) {
-   //Play Game
-   Gameplay();
+   //PLAY GAME
+      Gameplay();
    continueGame = false;
 
 } else if (menuPlace == 2) {
-   //Directions
-   cout<<"This is how you play the game!\n\n";
-   //Insert Directions display function
+   //DIRECTIONS
+   cout << R"(.------..------..------.     .------..------.     .------..------..------..------.)" << endl;
+   cout << R"(|H.--. ||O.--. ||W.--. |     |T.--. ||O.--. |     |P.--. ||L.--. ||A.--. ||Y.--. |)" << endl;
+   cout << R"(| :/\: || :/\: || :/\: |     | :/\: || :/\: |     | :/\: || :/\: || (\/) || (\/) |)" << endl;
+   cout << R"(| (__) || :\/: || :\/: |     | (__) || :\/: |     | (__) || (__) || :\/: || :\/: |)" << endl;
+   cout << R"(| '--'H|| '--'O|| '--'W|     | '--'T|| '--'O|     | '--'P|| '--'L|| '--'A|| '--'Y|)" << endl;
+   cout << R"(`------'`------'`------'     `------'`------'     `------'`------'`------'`------')" << endl;
+   cout << endl;
+
+   cout << "THE GOAL:" << endl;
+   cout << "The goal of Blackjack is to get your hand as close to 21 as possible without going over." << endl;
+   cout << "You will be playing against a dealer with the same goal. Both the player and dealer will" << endl;
+   cout << "start with 2 cards, however, the dealers second card will be face down to the player until" << endl;
+   cout << "you take your first turn. You will lose if you bust (your total score goes over 21) or if" << endl;
+   cout << "the dealers score is closer to 21 than yours." << endl;
+   cout << "YOUR TURN:" << endl;
+   cout << "On your turn, you can either hit or stand. 'Hit' means to add another card to your hand while" << endl;
+   cout << "'Stand' means that you do not want any more cards and will stand on your current total." << endl;
+   cout << "CALCULATING YOUR SCORE:" << endl;
+   cout << "Numbered cards are their face values, face cards have a value of 10, and ace's have a value" << endl;
+   cout << "of either 1 or 11. Ace's will automatically have a value of 11, if the ace being 11 will put" << endl;
+   cout << "your total score over 21, then it will automatically change to a value of 1." << endl;
+   cout << "THE DEALER'S PLAY:" << endl;
+   cout << "After you have taken your first turn, the dealers second card will be turned over for you to" << endl;
+   cout << "see. If their total is 17 or more, the dealer must stand. If their total is 16 or under, they" << endl;
+   cout << "must hit and continue to hit until their total reaches 17 or more, at which point they must stand." << endl;
+   cout << "If the dealer has an ace, and counting it as an 11 would put them at 17 or more but under 21, then" << endl;
+   cout << "the dealer must count it as an 11 and stand." << endl;
+   cout << endl;
+   //possibly add info about betting
+
    cout <<  "                   Please choose from the options below"<<endl;
    cout<<   "                              1. Play Game\n"
             "                              2. Directions\n"
@@ -162,7 +129,7 @@ if (menuPlace == 5) {
 
 
 } else if (menuPlace == 3) {
-   //Hi-Scores
+   //HI-SCORES / MONEY
    cout<<"Hi Scores!\n\n";
    //Insert Hi-scores display function
    cout <<  "                   Please choose from the options below"<<endl;
@@ -175,9 +142,13 @@ if (menuPlace == 5) {
    cin >> menuPlace;
 
 } else if (menuPlace == 4) {
+   //QUIT GAME
    continueGame = false;
 
 } else{
+   //INPUT ERROR
+   cin.clear();
+   cin.ignore(10000, '\n');
          cout<<"Invalid choice.\n";
    cout <<  "                   Please choose from the options below"<<endl;
    cout<<   "                              1. Play Game\n"
@@ -193,7 +164,6 @@ if (menuPlace == 5) {
 }
 
 
-
 void createDeck()
 {
    deck.clear();
@@ -207,6 +177,7 @@ void createDeck()
    }
 
 }
+
 
 string drawCard()
 {
@@ -286,10 +257,42 @@ void displayHand(vector<string> deck,bool player)
 {
 
 
+   // Each card has 4 lines of ASCII art
+   vector<string> line1;
+   vector<string> line2;
+   vector<string> line3;
+   vector<string> line4;
+
    for (int card = 0; card < deck.size(); card++)
    {
-      cout<<"["<<deck[card]<<"],";
+      //calculate spacing on the card display
+      string cardNum = deck[card];
+      string spacing;
+      int cardWidth = 5;
+      int paddingRight = cardWidth - cardNum.length();
+      if (paddingRight < 0) paddingRight = 0; //just in case
+      spacing = string(paddingRight, ' ');
+
+
+      line1.push_back("╭─────╮");
+      line2.push_back("│" + cardNum + spacing + "│");
+      line3.push_back("│     │");
+      line4.push_back("╰─────╯");
    }
+
+   //print cards side by side
+   for (int i = 0; i < deck.size(); i++) cout << line1[i] << "   ";
+   cout << endl;
+
+   for (int i = 0; i < deck.size(); i++) cout << line2[i] << "   ";
+   cout << endl;
+
+   for (int i = 0; i < deck.size(); i++) cout << line3[i] << "   ";
+   cout << endl;
+
+   for (int i = 0; i < deck.size(); i++) cout << line4[i] << "   ";
+   cout << endl;
+
    if (player)
    {
       cout<<"\nPLAYER: "<<playerScore;
@@ -402,105 +405,106 @@ void dealerLogic()
 
 }
 
-void Gameplay()
-{
-   loop = true;
-   int option;
+//switch case gameplay
+void Gameplay() {
+      loop = true;
+      int option;
 
-   //Player bets
-   resetHand();
+      //Player bets
+      resetHand();
 
 
-   while (loop)
-   {
-      //Show Dealer Hand
-      calculateDealerHandValue();
-      displayHand(dealerHand,false);
-
-      //Show Player hand
-      calculatePlayerHandValue();
-      displayHand(playerHand,true);
-
-      //blackjack on first hand check
-      if (playerScore == 21)
+      while (loop)
       {
-         //add dealer logic check to see if they get 21 too.
-         dealerLogic();
-         continue;
+         //Show Dealer Hand
+         calculateDealerHandValue();
+         displayHand(dealerHand,false);
 
-         //add to winnings
-      }
+         //Show Player hand
+         calculatePlayerHandValue();
+         displayHand(playerHand,true);
 
-      //Create function to display In Game User Interface
-      cout<<"1. Hit\n"
-         "2. Stand\n"
-            "3. Quit\n";
-      cin>>option;
-
-      switch (option)
-      {
-         //ace check set to automatically choose best option
-         case 1:
-            cout<<"-----------------------------------\n";
-            cout<<"\nPlayer Hit.\n";
-            playerHand.push_back(drawCard());
-            calculatePlayerHandValue();
-            //
-
-            if (playerScore > 21)
-            {
-               cout<<"-----------------------------------\n";
-               displayHand(playerHand,true);
-               cout<<playerScore <<" - PLAYER BUSTS!\n\n";
-               cout<<"-----------------------------------\n";
-
-               //Remove bet amount from player's funds
-
-               resetHand();
-
-               continue;
-
-            }
-            else if (playerScore == 21)
-            {
-               //Check if dealer gets 21 first. if not, blackjack player wins
-               dealerLogic();
-
-               //Add payout to total player funds
-
-               resetHand();
-               continue;
-            }
-
-            //displayHand(dealerHand,false);
-
-            break;
-
-         case 2:
-         cout<<"-----------------------------------\n";
-            cout<<"\nPlayer Stand.\n\n";
-            //dealer logic
+         //blackjack on first hand check
+         if (playerScore == 21)
+         {
+            //add dealer logic check to see if they get 21 too.
             dealerLogic();
-         cout<<"-----------------------------------\n";
-            break;
-         case 3:
-         cout<<"-----------------------------------\n";
-         cout<<"Player Quit.\n";
-         cout<<"-----------------------------------\n";
-         loop = false;
-         break;
+            continue;
 
-      default:
-         cout<<"-----------------------------------";
-         cout<<"Invalid option.\n";
-         cout<<"-----------------------------------\n";
+            //add to winnings
+         }
+
+         //Create function to display In Game User Interface
+         cout<<"(1) Hit      (2) Stand       (3) Quit" << endl;
+         cin>>option;
+
+         switch (option)
+         {
+            //ace check set to automatically choose best option
+            case 1:
+               cout<<"-----------------------------------\n";
+               cout<<"\nPlayer Hit.\n";
+               playerHand.push_back(drawCard());
+               calculatePlayerHandValue();
+               //
+
+               if (playerScore > 21)
+               {
+                  cout<<"-----------------------------------\n";
+                  displayHand(playerHand,true);
+                  cout<<playerScore <<" - PLAYER BUSTS!\n\n";
+                  cout<<"-----------------------------------\n";
+
+                  //Remove bet amount from player's funds
+
+                  resetHand();
+
+                  continue;
+
+               }
+               else if (playerScore == 21)
+               {
+                  //Check if dealer gets 21 first. if not, blackjack player wins
+                  dealerLogic();
+
+                  //Add payout to total player funds
+
+                  resetHand();
+                  continue;
+               }
+
+               //displayHand(dealerHand,false);
+
+               break;
+
+            case 2:
+               cout<<"-----------------------------------\n";
+               cout<<"\nPlayer Stand.\n\n";
+               //dealer logic
+               dealerLogic();
+               cout<<"-----------------------------------\n";
+               break;
+             case 3:
+                cout<<"-----------------------------------\n";
+                cout<<"Player Quit.\n";
+                cout<<"-----------------------------------\n";
+                loop = false;
+                break;
+
+            default:
+               cout<<"-----------------------------------";
+               cout<<"Invalid option.\n";
+               cout<<"-----------------------------------\n";
+         }
+         //resetHand();
+         //Player decides to hit or stay
+         //if 21 or less, dealer reveals card 2
+         //if dealer has 16 or less, must hit. else, stand
       }
-      //resetHand();
-      //Player decides to hit or stay
-      //if 21 or less, dealer reveals card 2
-      //if dealer has 16 or less, must hit. else, stand
-   }
+
 
 
 }
+
+
 
