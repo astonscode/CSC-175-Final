@@ -25,7 +25,8 @@ void displayHand(vector<string> deck,bool player);
 void calculateDealerHand();
 void calculatePlayerHand();
 void Gameplay();
-void MainMenu();
+void MainMenu();                   //displays menu's
+void playAgainValid (char &again); //validates input for playAgain variable
 
 
 /*void gameEnd()
@@ -39,6 +40,10 @@ void MainMenu();
       std::cout << "You exceeded 21...\nYou lost...";
    }
 }*/
+
+/********************************************/
+/*                 MAIN                     */
+/********************************************/
 int main()
 {
    srand(time(0));
@@ -80,6 +85,9 @@ if (menuPlace == 5) {
    cout << endl << endl;
 
    cin >> menuPlace;
+   if (menuPlace == 5) {
+      menuPlace = menuPlace + 1;
+   }
 
 } else if (menuPlace == 1) {
    //PLAY GAME
@@ -120,26 +128,32 @@ if (menuPlace == 5) {
 
    cout <<  "                   Please choose from the options below"<<endl;
    cout<<   "                              1. Play Game\n"
-            "                              2. Directions\n"
-            "                              3. Hi-Scores\n"
-            "                              4. Quit Game\n"
-            "                              5. Main Menu\n";
+          //"                              2. Directions\n"
+            "                              2. Hi-Scores\n"  //3
+            "                              3. Quit Game\n"  //4
+            "                              4. Main Menu\n"; //5
 
    cin >> menuPlace;
+   if (menuPlace >= 2 && menuPlace <= 4) {
+      menuPlace = menuPlace + 1;
+   }
 
 
 } else if (menuPlace == 3) {
-   //HI-SCORES / MONEY
+   //HI-SCORES or MONEY
    cout<<"Hi Scores!\n\n";
    //Insert Hi-scores display function
    cout <<  "                   Please choose from the options below"<<endl;
    cout<<   "                              1. Play Game\n"
             "                              2. Directions\n"
-            "                              3. Hi-Scores\n"
-            "                              4. Quit Game\n"
-            "                              5. Main Menu\n";
+          //"                              3. Hi-Scores\n"
+            "                              3. Quit Game\n"  //4
+            "                              4. Main Menu\n"; //5
 
    cin >> menuPlace;
+   if (menuPlace >= 3 && menuPlace <= 4) {
+      menuPlace = menuPlace + 1;
+   }
 
 } else if (menuPlace == 4) {
    //QUIT GAME
@@ -149,7 +163,7 @@ if (menuPlace == 5) {
    //INPUT ERROR
    cin.clear();
    cin.ignore(10000, '\n');
-         cout<<"Invalid choice.\n";
+         cout<<"Invalid input, please try again.\n";
    cout <<  "                   Please choose from the options below"<<endl;
    cout<<   "                              1. Play Game\n"
             "                              2. Directions\n"
@@ -192,6 +206,7 @@ string drawCard()
    return card;
 }
 
+
 //split into two functions for dealer and player?
 int cardValue(string card, bool player)
 {
@@ -231,6 +246,7 @@ int cardValue(string card, bool player)
 
 }
 
+
 void calculatePlayerHandValue()
 {
    playerScore = 0;
@@ -251,6 +267,7 @@ void calculateDealerHandValue()
       dealerScore += cardValue(dealerHand[card], false);
    }
 }
+
 
 //split into two functions for player and dealer
 void displayHand(vector<string> deck,bool player)
@@ -305,6 +322,7 @@ void displayHand(vector<string> deck,bool player)
    }
 }
 
+
 void resetHand()
 {
 
@@ -319,6 +337,7 @@ void resetHand()
 
 
 }
+
 
 void dealerLogic()
 {
@@ -339,7 +358,7 @@ void dealerLogic()
          cout<<"\nDealer busts. Player wins.\n\n";
          displayHand(dealerHand,false);
          displayHand(playerHand, true);
-         cout<<"-----------------------------------\n";
+         cout<< endl;
          logic = false;
          break;
 
@@ -362,7 +381,7 @@ void dealerLogic()
          cout<<"\nPush.\n\n";
          displayHand(dealerHand,false);
          displayHand(playerHand, true);
-         cout<<"-----------------------------------\n";
+         cout<< endl;
 
          logic = false;
          break;
@@ -373,7 +392,7 @@ void dealerLogic()
          cout<<"\nBlackjack! Player Wins!\n\n";
          displayHand(dealerHand,false);
          displayHand(playerHand, true);
-         cout<<"-----------------------------------\n";
+         cout<< endl;
          logic = false;
          break;
       }
@@ -382,18 +401,18 @@ void dealerLogic()
          if (dealerScore > playerScore)
          {
             cout<<"-----------------------------------\n";
-            cout<<dealerScore<<". Player loses. \n\n";
+            cout<< "Dealer has " << dealerScore << " -- player loses" << endl;
             displayHand(dealerHand,false);
             displayHand(playerHand,true);
-            cout<<"-----------------------------------\n";
+            cout<< endl;
          }
          else
          {
             cout<<"-----------------------------------\n";
-            cout<<dealerScore<<". Player Wins. \n\n";
+            cout<< "Dealer has " << dealerScore << "-- player Wins. \n\n";
             displayHand(dealerHand,false);
             displayHand(playerHand,true);
-            cout<<"-----------------------------------\n";
+            cout<< endl;
          }
          break;
       }
@@ -405,8 +424,10 @@ void dealerLogic()
 
 }
 
-//switch case gameplay
+
 void Gameplay() {
+   char playAgain = 'y';
+   while (playAgain == 'y' || playAgain == 'Y') {
       loop = true;
       int option;
 
@@ -455,6 +476,11 @@ void Gameplay() {
                   cout<<playerScore <<" - PLAYER BUSTS!\n\n";
                   cout<<"-----------------------------------\n";
 
+                  //ask if they want to play another hand
+                  cout << "Play another hand? (y/n)" << endl;
+                  cin >> playAgain;
+                  playAgainValid(playAgain);
+
                   //Remove bet amount from player's funds
 
                   resetHand();
@@ -470,6 +496,10 @@ void Gameplay() {
                   //Add payout to total player funds
 
                   resetHand();
+                  //ask if they want to play another hand
+                  cout << "Play another hand? (y/n)" << endl;
+                  cin >> playAgain;
+                  playAgainValid(playAgain);
                   continue;
                }
 
@@ -483,28 +513,49 @@ void Gameplay() {
                //dealer logic
                dealerLogic();
                cout<<"-----------------------------------\n";
+               //ask if they want to play another hand
+               cout << "Play another hand? (y/n)" << endl;
+               cin >> playAgain;
+               playAgainValid(playAgain);
                break;
-             case 3:
-                cout<<"-----------------------------------\n";
-                cout<<"Player Quit.\n";
-                cout<<"-----------------------------------\n";
-                loop = false;
-                break;
+            case 3:
+               cout<<"-----------------------------------\n";
+               cout<<"Player Quit.\n";
+               cout<<"-----------------------------------\n";
+               loop = false;
+               break;
 
             default:
-               cout<<"-----------------------------------";
-               cout<<"Invalid option.\n";
+               cin.clear();
+               cin.ignore(10000, '\n');
+               cout<<"-----------------------------------\n";
+               cout<<"Invalid input, please try again.\n";
                cout<<"-----------------------------------\n";
          }
          //resetHand();
          //Player decides to hit or stay
          //if 21 or less, dealer reveals card 2
          //if dealer has 16 or less, must hit. else, stand
+
+         if (playAgain == 'n' || playAgain == 'N') {
+            loop = false;
+         }
       }
+   }
 
 
 
 }
 
 
+void playAgainValid (char &again) {
+   while ((again != 'y' && again != 'Y') && (again != 'n' && again != 'N')) {
+      if ((again != 'y' && again != 'Y') && (again != 'n' && again != 'N')) {
+         cin.clear();
+         cin.ignore(10000, '\n');
+         cout<<"Invalid input, please try again.\n";
+         cin >> again;
+      }
+   }
+}
 
