@@ -7,7 +7,7 @@
 using namespace std;
 
 std::vector<std::string> cards = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-// std::vector<std::string> suits = {"♠", "♣︎", "♦︎", "♥︎"};
+//std::vector<std::string> suits = {"♠", "♣︎", "♦︎", "♥︎"};
 std::vector<std::string> suits = {"S", "C", "D", "H"};
 vector<string> deck;
 vector<string> playerHand;
@@ -19,7 +19,7 @@ int dealerScore, playerScore;
 void createDeck();
 string drawCard(vector<string> cards);
 int cardValue(string card, bool player);
-void displayHand(vector<string> deck, bool player);
+void displayHand(vector<string> displayDeck, bool player);
 void calculateDealerHand();
 void calculatePlayerHand();
 void Gameplay();
@@ -76,15 +76,13 @@ int cardValue(string card, bool player)
                 return 11;
             }
         }
-        else
-        {
-            // dealer soft 17 check
-            if (dealerScore + 11 == 17 || dealerScore + 11 > 21)
-            {
-                return 1;
-            }
-            return 11;
-        }
+
+         // dealer soft 17 check
+         if (!player && dealerScore + 11 == 17 || dealerScore + 11 > 21)
+         {
+             return 1;
+         }
+         return 11;
     }
 
    //stoi converts a string into an int so it can be used in calculations.
@@ -116,7 +114,7 @@ vector<string> handSort(vector<string> sortDeck)
    }
    for (int k = 0; k < aces.size(); k++)
    {
-      temp.push_back(nonAces[k]);
+      temp.push_back(aces[k]);
    }
    return temp;
 }
@@ -129,6 +127,7 @@ void calculatePlayerHandValue()
 
     for (int card = 0; card < temp.size(); card++)
     {
+       //cout<<temp[0];
         playerScore += cardValue(temp[card], true);
        //dealerScore += cardValue(playerHand[card], true);
     }
@@ -147,7 +146,7 @@ void calculateDealerHandValue()
 }
 
 //Displays Player/Deal hand and scores
-void displayHand(vector<string> deck, bool player)
+void displayHand(vector<string> displayDeck, bool player)
 {
 
    // Each card has 4 lines of ASCII art
@@ -156,10 +155,10 @@ void displayHand(vector<string> deck, bool player)
    vector<string> line3;
    vector<string> line4;
 
-   for (int card = 0; card < deck.size(); card++)
+   for (int card = 0; card < displayDeck.size(); card++)
    {
       // calculate spacing on the card display
-      string cardNum = deck[card];
+      string cardNum = displayDeck[card];
       string spacing;
       int cardWidth = 5;
       int paddingRight = cardWidth - cardNum.length();
@@ -175,19 +174,19 @@ void displayHand(vector<string> deck, bool player)
    }
 
    // print cards side by side
-   for (int i = 0; i < deck.size(); i++)
+   for (int i = 0; i < displayDeck.size(); i++)
       cout << line1[i] << "   ";
    cout << endl;
 
-   for (int i = 0; i < deck.size(); i++)
+   for (int i = 0; i < displayDeck.size(); i++)
       cout << line2[i] << "   ";
    cout << endl;
 
-   for (int i = 0; i < deck.size(); i++)
+   for (int i = 0; i < displayDeck.size(); i++)
       cout << line3[i] << "   ";
    cout << endl;
 
-   for (int i = 0; i < deck.size(); i++)
+   for (int i = 0; i < displayDeck.size(); i++)
       cout << line4[i] << "   ";
    cout << endl;
 
@@ -216,6 +215,7 @@ void resetHand()
 
    dealerHand.push_back(drawCard());
 }
+
 
 //ASTON - this is probably the best spot to calculate wins?
 //I'll let you decide.
