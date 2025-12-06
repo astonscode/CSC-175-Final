@@ -558,6 +558,7 @@ void MainMenu()
          // QUIT GAME
          loop = false;
          continueGame = false;
+         cout << "Thank you for playing. Goodbye!\n";
 
       }
       else
@@ -576,7 +577,7 @@ void MainMenu()
          cin >> menuPlace;
       }
    }
-   cout << "Thank you for playing. Goodbye!";
+
 }
 
 
