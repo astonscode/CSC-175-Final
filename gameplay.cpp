@@ -218,8 +218,7 @@ void resetHand()
    dealerHand.push_back(drawCard());
 }
 
-// ASTON - this is probably the best spot to calculate wins?
-// I'll let you decide.
+
 // Dealer decisions based on certain criteria - wins/losses
 void dealerLogic()
 {
@@ -277,6 +276,7 @@ void dealerLogic()
          // logic = false;
 
          // player wins 1.5x bet
+         endGameTracking(gt, 2);
          break;
       }
       else if (dealerScore > 16)
@@ -289,6 +289,7 @@ void dealerLogic()
             displayHand(playerHand, true);
             cout << endl;
             // player loses bet amount
+
          }
          else
          {
@@ -298,18 +299,22 @@ void dealerLogic()
             displayHand(playerHand, true);
             cout << endl;
             // player wins bet amount
+            endGameTracking(gt, 2);
          }
-         break;
-      }
 
-      dealerHand.push_back(drawCard());
+      }
+      break;
+      //dealerHand.push_back(drawCard());
    }
+   resetHand();
+
 }
 
 // Main gameplay loop that connects all the previous functions.
 // allows player to make decisions and decide to play or quit. Bets are made here too
 void Gameplay()
 {
+
    char playAgain = 'y';
    gt = initTracking(betRange);
    placeBet(gt, betRange);
@@ -324,6 +329,7 @@ void Gameplay()
 
       while (loop)
       {
+
          // Show Dealer Hand
          calculateDealerHandValue();
          displayHand(dealerHand, false);
@@ -411,6 +417,26 @@ void Gameplay()
 
             if (playAgain == 'y' || playAgain == 'Y')
             {
+               if (gt.amt == 0)
+               {
+                  char c;
+                  cout<<"You are out of money. Would you like to buy back in?";
+                  cin>>c;
+                  if (c == 'y' || c == 'Y')
+                  {
+                     gt = initTracking(betRange);
+
+                     resetHand();
+                     placeBet(gt, betRange);
+                     statsTracking(gt);
+                  }
+                  else
+                  {
+                     MainMenu();
+                  }
+                  break;
+
+               }
                resetHand();
                placeBet(gt, betRange);
                statsTracking(gt);
