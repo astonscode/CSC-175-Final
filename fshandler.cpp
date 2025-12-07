@@ -6,7 +6,7 @@
 #include <sstream>
 
 using namespace std;
-
+/*
 class User
 {
 public:
@@ -59,6 +59,15 @@ void save(const string &f, const vector<User> &users)
    }
 }
 
+void create(int m)
+{
+   string u;
+   cout << "Username: ";
+   cin >> u;
+   // m is money
+
+   User user(u, m);
+}
 int main()
 {
    string filename = "sv.txt";
@@ -67,10 +76,6 @@ int main()
    string uName;
    cout << "username:\t";
    cin >> uName;
-
-   int dnr;
-   cout << "money:\t";
-   cin >> dnr;
 
    bool found = false;
    for (User &u : users)
@@ -100,3 +105,9 @@ int main()
 
    return 0;
 }
+*/
+struct user
+{
+   string name;
+   int money;
+};

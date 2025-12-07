@@ -3,18 +3,18 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include "tracker.h"
 
 using namespace std;
 
 std::vector<std::string> cards = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-//std::vector<std::string> suits = {"♠", "♣︎", "♦︎", "♥︎"};
+// std::vector<std::string> suits = {"♠", "♣︎", "♦︎", "♥︎"};
 std::vector<std::string> suits = {"S", "C", "D", "H"};
 vector<string> deck;
 vector<string> playerHand;
 vector<string> dealerHand;
 bool loop = true;
 int dealerScore, playerScore;
-
 
 void createDeck();
 string drawCard(vector<string> cards);
@@ -26,70 +26,74 @@ void Gameplay();
 void MainMenu();
 void playAgainValid(char &again); // validates input for playAgain variable
 
-//creates the main deck by looping through cards and suits vector and adding to deck vector.
+// creates the main deck by looping through cards and suits vector and adding to deck vector.
 void createDeck()
 {
-    deck.clear();
-    for (int suit = 0; suit < 4; suit++)
-    {
-        for (int card = 0; card < 13; card++)
-        {
-            deck.push_back(cards[card] + suits[suit]);
-        }
-    }
+   deck.clear();
+   for (int suit = 0; suit < 4; suit++)
+   {
+      for (int card = 0; card < 13; card++)
+      {
+         deck.push_back(cards[card] + suits[suit]);
+      }
+   }
 }
 
-//Pulls a random card from deck and removes it from vector
+// creates global tracker object and initializes it
+vector<double> betRange = {5.0, 500.0}; // min and max bet amounts
+tracker gt;
+
+// Pulls a random card from deck and removes it from vector
 string drawCard()
 {
 
-    if (deck.empty())
-    {
-        cout << "Deck is empty.\n";
-    }
+   if (deck.empty())
+   {
+      cout << "Deck is empty.\n";
+   }
 
-    int randomCard = rand() % deck.size();
-    string card = deck[randomCard];
+   int randomCard = rand() % deck.size();
+   string card = deck[randomCard];
 
-    deck.erase(deck.begin() + randomCard);
-    return card;
+   deck.erase(deck.begin() + randomCard);
+   return card;
 }
 
-//makes decisions based on what card is to assign it a value. Returns value of card.
+// makes decisions based on what card is to assign it a value. Returns value of card.
 int cardValue(string card, bool player)
 {
-    if ((card[0] == '1' && card[1] == '0') || card[0] == 'K' || card[0] == 'Q' || card[0] == 'J') // 10 check
-    {
-        return 10;
-    }
-    else if (card[0] == 'A')
-    {
-        // Ace logic
-        if (player) // doesn't need player tag unless we're implementing soft 17
-        {
-            if (playerScore + 11 > 21)
-            {
-                return 1;
-            }
-            else
-            {
-                return 11;
-            }
-        }
-
-         // dealer soft 17 check
-         if (!player && dealerScore + 11 == 17 || dealerScore + 11 > 21)
+   if ((card[0] == '1' && card[1] == '0') || card[0] == 'K' || card[0] == 'Q' || card[0] == 'J') // 10 check
+   {
+      return 10;
+   }
+   else if (card[0] == 'A')
+   {
+      // Ace logic
+      if (player) // doesn't need player tag unless we're implementing soft 17
+      {
+         if (playerScore + 11 > 21)
          {
-             return 1;
+            return 1;
          }
-         return 11;
-    }
+         else
+         {
+            return 11;
+         }
+      }
 
-   //stoi converts a string into an int so it can be used in calculations.
-    return stoi(card);
+      // dealer soft 17 check
+      if (!player && dealerScore + 11 == 17 || dealerScore + 11 > 21)
+      {
+         return 1;
+      }
+      return 11;
+   }
+
+   // stoi converts a string into an int so it can be used in calculations.
+   return stoi(card);
 }
 
-//Moves all aces to bottom of a vector to calculate hand.
+// Moves all aces to bottom of a vector to calculate hand.
 vector<string> handSort(vector<string> sortDeck)
 {
    vector<string> temp;
@@ -119,33 +123,33 @@ vector<string> handSort(vector<string> sortDeck)
    return temp;
 }
 
-//loops through hand and call cardValue function on each card. Update score
+// loops through hand and call cardValue function on each card. Update score
 void calculatePlayerHandValue()
 {
    playerScore = 0;
    vector<string> temp = handSort(playerHand);
 
-    for (int card = 0; card < temp.size(); card++)
-    {
-       //cout<<temp[0];
-        playerScore += cardValue(temp[card], true);
-       //dealerScore += cardValue(playerHand[card], true);
-    }
+   for (int card = 0; card < temp.size(); card++)
+   {
+      // cout<<temp[0];
+      playerScore += cardValue(temp[card], true);
+      // dealerScore += cardValue(playerHand[card], true);
+   }
 }
 
 void calculateDealerHandValue()
 {
-    dealerScore = 0;
+   dealerScore = 0;
    vector<string> temp = handSort(dealerHand);
 
-    for (int card = 0; card < temp.size(); card++)
-    {
-         dealerScore += cardValue(temp[card], false);
-        //dealerScore += cardValue(dealerHand[card], false);
-    }
+   for (int card = 0; card < temp.size(); card++)
+   {
+      dealerScore += cardValue(temp[card], false);
+      // dealerScore += cardValue(dealerHand[card], false);
+   }
 }
 
-//Displays Player/Deal hand and scores
+// Displays Player/Deal hand and scores
 void displayHand(vector<string> displayDeck, bool player)
 {
 
@@ -170,7 +174,6 @@ void displayHand(vector<string> displayDeck, bool player)
       line2.push_back("│" + cardNum + spacing + "│");
       line3.push_back("│     │");
       line4.push_back("╰─────╯");
-
    }
 
    // print cards side by side
@@ -202,10 +205,9 @@ void displayHand(vector<string> displayDeck, bool player)
    }
 }
 
-//Resets hand by creating new deck of 52 cards, clearing both hands, and drawing new hands
+// Resets hand by creating new deck of 52 cards, clearing both hands, and drawing new hands
 void resetHand()
 {
-
    playerHand.clear();
    dealerHand.clear();
 
@@ -216,10 +218,9 @@ void resetHand()
    dealerHand.push_back(drawCard());
 }
 
-
-//ASTON - this is probably the best spot to calculate wins?
-//I'll let you decide.
-//Dealer decisions based on certain criteria - wins/losses
+// ASTON - this is probably the best spot to calculate wins?
+// I'll let you decide.
+// Dealer decisions based on certain criteria - wins/losses
 void dealerLogic()
 {
    bool logic = true;
@@ -237,12 +238,11 @@ void dealerLogic()
          displayHand(dealerHand, false);
          displayHand(playerHand, true);
          cout << endl;
-         //logic = false;
+         // logic = false;
 
          // pay player
+         endGameTracking(gt, 2);
          break;
-
-
       }
 
       else if (dealerScore <= 16)
@@ -261,8 +261,9 @@ void dealerLogic()
          displayHand(playerHand, true);
          cout << endl;
 
-         //logic = false;
-         //player gets money back
+         // logic = false;
+         // player gets money back
+         endGameTracking(gt, 0.5);
 
          break;
       }
@@ -273,9 +274,9 @@ void dealerLogic()
          displayHand(dealerHand, false);
          displayHand(playerHand, true);
          cout << endl;
-         //logic = false;
+         // logic = false;
 
-         //player wins 1.5x bet
+         // player wins 1.5x bet
          break;
       }
       else if (dealerScore > 16)
@@ -287,7 +288,7 @@ void dealerLogic()
             displayHand(dealerHand, false);
             displayHand(playerHand, true);
             cout << endl;
-            //player loses bet amount
+            // player loses bet amount
          }
          else
          {
@@ -296,28 +297,28 @@ void dealerLogic()
             displayHand(dealerHand, false);
             displayHand(playerHand, true);
             cout << endl;
-            //player wins bet amount
+            // player wins bet amount
          }
          break;
       }
 
       dealerHand.push_back(drawCard());
    }
-
-   resetHand();
 }
 
-//Main gameplay loop that connects all the previous functions.
-//allows player to make decisions and decide to play or quit. Bets are made here too
+// Main gameplay loop that connects all the previous functions.
+// allows player to make decisions and decide to play or quit. Bets are made here too
 void Gameplay()
 {
    char playAgain = 'y';
+   gt = initTracking(betRange);
+   placeBet(gt, betRange);
+   statsTracking(gt);
+
    while (playAgain == 'y' || playAgain == 'Y')
    {
       loop = true;
       int option;
-
-      // Player bets
 
       resetHand();
 
@@ -337,11 +338,10 @@ void Gameplay()
             // add dealer logic check to see if they get 21 too.
             dealerLogic();
             continue;
-
          }
 
-         //In Game User Interface
-         cout << "(1) Hit      (2) Stand       (3) Quit" << endl;
+         // In Game User Interface
+         cout << "(1) Hit      (2) Stand       (3) Quit" << "\n> ";
          cin >> option;
 
          switch (option)
@@ -352,7 +352,6 @@ void Gameplay()
             playerHand.push_back(drawCard());
             calculatePlayerHandValue();
 
-
             if (playerScore > 21)
             {
                cout << "-----------------------------------\n";
@@ -360,27 +359,40 @@ void Gameplay()
                cout << playerScore << " - PLAYER BUSTS!\n\n";
                cout << "-----------------------------------\n";
 
-               //Play Again?
-               cout << "Play another hand? (y/n)" << endl;
+               endGameTracking(gt, 0);
+
+               // Play Again?
+               cout << "Play another hand? (y/n)\n> ";
                cin >> playAgain;
                playAgainValid(playAgain);
 
-               // Remove bet amount from player's funds
-
-               resetHand();
+               if (playAgain == 'y' || playAgain == 'Y')
+               {
+                  resetHand();
+                  placeBet(gt, betRange);
+                  statsTracking(gt);
+               }
 
                continue;
             }
             else if (playerScore == 21)
             {
                // Check if dealer gets 21 first. if not, blackjack player wins
+               cout << "You have 21! You won't need to play this round further. Only way you lose is if the dealer pushes...\n";
                dealerLogic();
 
-               resetHand();
-               //Play Again?
-               cout << "Play another hand? (y/n)" << endl;
+               // Play Again?
+               cout << "Play another hand? (y/n)\n> ";
                cin >> playAgain;
                playAgainValid(playAgain);
+
+               if (playAgain == 'y' || playAgain == 'Y')
+               {
+                  resetHand();
+                  placeBet(gt, betRange);
+                  statsTracking(gt);
+               }
+
                continue;
             }
 
@@ -392,10 +404,18 @@ void Gameplay()
             // dealer logic
             dealerLogic();
             cout << "-----------------------------------\n";
-            //Play Again?
-            cout << "Play another hand? (y/n)" << endl;
+            // Play Again?
+            cout << "Play another hand? (y/n)\n> ";
             cin >> playAgain;
             playAgainValid(playAgain);
+
+            if (playAgain == 'y' || playAgain == 'Y')
+            {
+               resetHand();
+               placeBet(gt, betRange);
+               statsTracking(gt);
+            }
+
             break;
          case 3:
             cout << "-----------------------------------\n";
@@ -418,12 +438,10 @@ void Gameplay()
             loop = false;
             MainMenu();
          }
-
       }
       break;
    }
    playAgain = 'n';
-
 }
 
 void playAgainValid(char &again)
@@ -437,7 +455,6 @@ void playAgainValid(char &again)
          cout << "Invalid input, please try again.\n";
          cin >> again;
       }
-
    }
 }
 
@@ -473,9 +490,7 @@ void MainMenu()
                  "                              2. Directions\n"
                  "                              3. Hi-Scores\n"
                  "                              4. Quit Game\n";
-         cout << endl
-              << endl;
-
+         cout << "> ";
          cin >> menuPlace;
          if (menuPlace == 5)
          {
@@ -487,7 +502,6 @@ void MainMenu()
          // PLAY GAME
          Gameplay();
          continueGame = false;
-
       }
       else if (menuPlace == 2)
       {
@@ -559,7 +573,7 @@ void MainMenu()
          loop = false;
          continueGame = false;
          cout << "Thank you for playing. Goodbye!\n";
-
+         break;
       }
       else
       {
@@ -577,10 +591,4 @@ void MainMenu()
          cin >> menuPlace;
       }
    }
-
 }
-
-
-
-
-

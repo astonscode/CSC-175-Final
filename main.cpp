@@ -3,10 +3,9 @@
 #include <string>
 #include <ctime>
 
-#include "./betmgm.cpp"
-//#include "./fshandler.cpp"
+#include "./tracker.cpp"
+// #include "./fshandler.cpp"
 #include "./gameplay.cpp"
-
 
 using namespace std;
 
@@ -16,11 +15,8 @@ using namespace std;
 int main()
 {
 
-
    srand(time(0));
    MainMenu();
 
    return 0;
 }
-
-
