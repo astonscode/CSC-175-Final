@@ -461,7 +461,6 @@ void playAgainValid(char &again)
 /********************************************/
 /*                 MENUS                    */
 /********************************************/
-
 void MainMenu()
 {
    bool continueGame = true;
@@ -533,8 +532,11 @@ void MainMenu()
          cout << "must hit and continue to hit until their total reaches 17 or more, at which point they must stand." << endl;
          cout << "If the dealer has an ace, and counting it as an 11 would put them at 17 or more but under 21, then" << endl;
          cout << "the dealer must count it as an 11 and stand." << endl;
+         cout << "BETTING:" << endl;
+         cout << "Each players starts out with $25. You can bet a minimum of $5 and a maximum of $500 on each hand." << endl;
+         cout << "If the player wins, your bet is doubled and returned to you. On a loss you lose your bet. On a push" << endl;
+         cout << "(you and the dealer tie) you will have your bet returned to you at the same value." << endl;
          cout << endl;
-         // possibly add info about betting
 
          cout << "                   Please choose from the options below" << endl;
          cout << "                              1. Play Game\n"
