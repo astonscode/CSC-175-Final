@@ -536,7 +536,7 @@ void MainMenu()
          cout << "Each players starts out with $25. You can bet a minimum of $5 and a maximum of $500 on each hand." << endl;
          cout << "If the player wins, your bet is doubled and returned to you. On a loss you lose your bet. On a push" << endl;
          cout << "(you and the dealer tie) you will have your bet returned to you at the same value." << endl;
-         cout << endl;
+         cout << endl; //sky - added betting info
 
          cout << "                   Please choose from the options below" << endl;
          cout << "                              1. Play Game\n"
