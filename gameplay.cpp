@@ -3,7 +3,9 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <fstream>
 #include "tracker.h"
+#include "fshandler.h"
 
 using namespace std;
 
@@ -15,6 +17,9 @@ vector<string> playerHand;
 vector<string> dealerHand;
 bool loop = true;
 int dealerScore, playerScore;
+
+vector<User> users = loadUsers();
+User activeUser;
 
 void createDeck();
 string drawCard(vector<string> cards);
@@ -311,6 +316,7 @@ void dealerLogic()
 void Gameplay()
 {
    char playAgain = 'y';
+
    gt = initTracking(betRange);
    placeBet(gt, betRange);
    statsTracking(gt);
@@ -422,7 +428,7 @@ void Gameplay()
             cout << "Player Quit.\n";
             cout << "-----------------------------------\n";
             loop = false;
-            MainMenu();
+            playAgain = 'n';
             break;
 
          default:
@@ -441,7 +447,11 @@ void Gameplay()
       }
       break;
    }
-   playAgain = 'n';
+
+   // Update activeUser with final money and save before returning to menu
+   activeUser.money = static_cast<int>(gt.amt);
+   updateUser(users, activeUser.name, activeUser.money);
+   saveUsers(users);
 }
 
 void playAgainValid(char &again)
@@ -456,6 +466,26 @@ void playAgainValid(char &again)
          cin >> again;
       }
    }
+}
+
+void displayHighScores()
+{
+   ifstream file("sv.txt");
+   string line;
+
+   if (!file.is_open())
+   {
+      cout << "No high scores yet!\n";
+      return;
+   }
+
+   cout << "\n===== HIGH SCORES =====\n";
+   while (getline(file, line))
+   {
+      cout << line << endl;
+   }
+   cout << "======================\n\n";
+   file.close();
 }
 
 /********************************************/
@@ -500,6 +530,8 @@ void MainMenu()
       else if (menuPlace == 1)
       {
          // PLAY GAME
+         cout << "Username: ";
+         cin >> activeUser.name;
          Gameplay();
          continueGame = false;
       }
@@ -552,8 +584,7 @@ void MainMenu()
       else if (menuPlace == 3)
       {
          // HI-SCORES or MONEY
-         cout << "Hi Scores!\n\n";
-         // Insert Hi-scores display function
+         displayHighScores();
          cout << "                   Please choose from the options below" << endl;
          cout << "                              1. Play Game\n"
                  "                              2. Directions\n"

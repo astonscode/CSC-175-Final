@@ -4,7 +4,7 @@
 #include <ctime>
 
 #include "./tracker.cpp"
-// #include "./fshandler.cpp"
+#include "./fshandler.cpp"
 #include "./gameplay.cpp"
 
 using namespace std;

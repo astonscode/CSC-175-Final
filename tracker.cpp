@@ -3,7 +3,7 @@
 using namespace std;
 
 // initialize and return a tracker configured from the provided buy-in range
-tracker initTracking(const std::vector<double> &buyIn)
+tracker initTracking(vector<double> &buyIn)
 {
    tracker t;
    t.initAmt = buyIn[0] * 5;
@@ -39,7 +39,7 @@ void statsTracking(tracker &t) // displays current stats
    std::cout << "IF Loss: $" << outcome(t.currentBet, 0) << endl;
 }
 
-void placeBet(tracker &t, const std::vector<double> &b) // places a bet and validates input
+void placeBet(tracker &t, vector<double> &b) // places a bet and validates input
 {
    double bet;
    std::cout << "Place your bet (must be between $" << b[0] << " and $" << b[1] << "): $";

@@ -2,6 +2,7 @@
 #define TRACKER_H
 #include <vector>
 
+using namespace std;
 // header file for tracker.cpp
 struct tracker
 {
@@ -10,9 +11,9 @@ struct tracker
    double currentBet = 0;
 };
 
-tracker initTracking(const std::vector<double> &buyIn);
+tracker initTracking(vector<double> &buyIn);
 void statsTracking(tracker &t);
-void placeBet(tracker &t, const std::vector<double> &b);
+void placeBet(tracker &t, vector<double> &b);
 void endGameTracking(tracker &t, double r);
 
 #endif
