@@ -345,12 +345,12 @@ void Gameplay()
          displayHand(playerHand, true);
 
          // blackjack on first hand check
-         if (playerScore == 21)
+         /*if (playerScore == 21)
          {
             // add dealer logic check to see if they get 21 too.
             dealerLogic();
             continue;
-         }
+         }*/
 
          // In Game User Interface
          cout << "(1) Hit      (2) Stand       (3) Quit" << "\n> ";
@@ -380,6 +380,36 @@ void Gameplay()
 
                if (playAgain == 'y' || playAgain == 'Y')
                {
+                  if (gt.amt < 5)
+                  {
+                     char c;
+                     cout<<"Minimum bet is $5. Would you like to buy back in?";
+                     cin>>c;
+                     while ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
+                     {
+                        if ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
+                        {
+                           cin.clear();
+                           cin.ignore(10000, '\n');
+                           cout << "Invalid input, please try again.\n";
+                           cin >> c;
+                        }
+                     }
+                     if (c == 'y' || c == 'Y')
+                     {
+                        gt = initTracking(betRange);
+
+                        resetHand();
+                        placeBet(gt, betRange);
+                        statsTracking(gt);
+                     }
+                     else
+                     {
+                        MainMenu();
+                     }
+                     break;
+
+                  }
                   resetHand();
                   placeBet(gt, betRange);
                   statsTracking(gt);
@@ -423,11 +453,21 @@ void Gameplay()
 
             if (playAgain == 'y' || playAgain == 'Y')
             {
-               if (gt.amt == 0)
+               if (gt.amt < 5)
                {
                   char c;
-                  cout<<"You are out of money. Would you like to buy back in?";
+                  cout<<"Minimum bet is $5. Would you like to buy back in?";
                   cin>>c;
+                  while ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
+                  {
+                     if ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
+                     {
+                        cin.clear();
+                        cin.ignore(10000, '\n');
+                        cout << "Invalid input, please try again.\n";
+                        cin >> c;
+                     }
+                  }
                   if (c == 'y' || c == 'Y')
                   {
                      gt = initTracking(betRange);
@@ -512,6 +552,40 @@ void displayHighScores()
    }
    cout << "======================\n\n";
    file.close();
+}
+
+void checkLowBalance()
+{
+   if (gt.amt < 5)
+   {
+      char c;
+      cout<<"Minimum bet is $5. Would you like to buy back in?";
+      cin>>c;
+      while ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
+      {
+         if ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
+         {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Invalid input, please try again.\n";
+            cin >> c;
+         }
+      }
+      if (c == 'y' || c == 'Y')
+      {
+         gt = initTracking(betRange);
+
+         resetHand();
+         placeBet(gt, betRange);
+         statsTracking(gt);
+      }
+      else
+      {
+         MainMenu();
+      }
+      //break;
+
+   }
 }
 
 /********************************************/
