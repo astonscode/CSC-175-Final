@@ -306,7 +306,7 @@ void dealerLogic()
          }
       }
       break;
-      // dealerHand.push_back(drawCard());
+      // dealerHand.push_back(drawCard()); s
    }
    resetHand();
 }
@@ -408,6 +408,10 @@ void Gameplay()
                   resetHand();
                   placeBet(gt, betRange);
                   statsTracking(gt);
+               }
+               else
+               {
+                  MainMenu();
                }
 
                continue;
