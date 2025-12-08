@@ -32,24 +32,24 @@ double outcome(double bet, int result) // calculates outcome based on bet and re
 
 void statsTracking(tracker &t) // displays current stats
 {
-   std::cout << "\nMoney: $" << t.amt << endl;
-   std::cout << "Current Bet: $" << t.currentBet << endl;
-   std::cout << "IF Win: $" << outcome(t.currentBet, 2) << endl;
-   std::cout << "IF Push: $" << outcome(t.currentBet, 1) << endl;
-   std::cout << "IF Loss: $" << outcome(t.currentBet, 0) << endl;
+   cout << "\nMoney: $" << t.amt << endl;
+   cout << "Current Bet: $" << t.currentBet << endl;
+   cout << "IF Win: $" << outcome(t.currentBet, 2) << endl;
+   cout << "IF Push: $" << outcome(t.currentBet, 1) << endl;
+   cout << "IF Loss: $" << outcome(t.currentBet, 0) << endl;
 }
 
 void placeBet(tracker &t, vector<double> &b) // places a bet and validates input
 {
    double bet;
-   std::cout << "\nCurrent balance: $" << t.amt << endl;
-   std::cout << "Place your bet (must be between $" << b[0] << " and $" << b[1] << "): $";
+   cout << "\nCurrent balance: $" << t.amt << endl;
+   cout << "Place your bet (must be between $" << b[0] << " and $" << b[1] << "): $";
    cin >> bet;
    while (true)
    {
       if (bet > t.amt)
       {
-         std::cout << "Bet exceeds current balance ($" << t.amt << ").\nNew Bet > $";
+         cout << "Bet exceeds current balance ($" << t.amt << ").\nNew Bet > $";
          cin >> bet;
          if (bet == 0)
          {
@@ -60,7 +60,7 @@ void placeBet(tracker &t, vector<double> &b) // places a bet and validates input
       }
       if (b[0] > bet)
       {
-         std::cout << "Minimum buy-in not met ($" << b[0] << ").\nNew Bet > $";
+         cout << "Minimum buy-in not met ($" << b[0] << ").\nNew Bet > $";
          cin >> bet;
          if (bet == 0)
          {
@@ -71,7 +71,7 @@ void placeBet(tracker &t, vector<double> &b) // places a bet and validates input
       }
       if (bet > b[1])
       {
-         std::cout << "Exceeded maximum bet ($" << b[1] << ").\nNew Bet > $";
+         cout << "Exceeded maximum bet ($" << b[1] << ").\nNew Bet > $";
          cin >> bet;
          if (bet == 0)
          {
@@ -90,20 +90,20 @@ void endGameTracking(tracker &t, double r) // ends tracking for a game based on 
 {
    if (r == 0)
    {
-      std::cout << "you lost...\n";
+      cout << "you lost...\n";
    }
    else if (r == 0.5)
    {
-      std::cout << "push! $" << t.currentBet << " stake awarded." << endl;
+      cout << "push! $" << t.currentBet << " stake awarded." << endl;
       t.amt += t.currentBet;
    }
    else
    {
-      std::cout << "you won! $" << t.currentBet * 2 << " awarded!" << endl;
+      cout << "you won! $" << t.currentBet * 2 << " awarded!" << endl;
       t.amt += t.currentBet * 2;
    }
 
    t.currentBet = 0;
-   std::cout << "Your money: $" << t.amt << endl;
-   std::cout << "-----------------------------------" << endl; // sky - line was not showing up for each win/loss case
+   cout << "Your money: $" << t.amt << endl;
+   cout << "-----------------------------------" << endl; // sky - line was not showing up for each win/loss case
 }
