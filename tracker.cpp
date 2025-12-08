@@ -105,5 +105,5 @@ void endGameTracking(tracker &t, double r) // ends tracking for a game based on 
 
    t.currentBet = 0;
    std::cout << "Your money: $" << t.amt << endl;
-   std::cout << "-----------------------------------" << endl; //sky - line was not showing up for each win/loss case
+   std::cout << "-----------------------------------" << endl; // sky - line was not showing up for each win/loss case
 }

@@ -223,7 +223,6 @@ void resetHand()
    dealerHand.push_back(drawCard());
 }
 
-
 // Dealer decisions based on certain criteria - wins/losses
 void dealerLogic()
 {
@@ -294,7 +293,6 @@ void dealerLogic()
             displayHand(playerHand, true);
             cout << endl;
             // player loses bet amount
-
          }
          else
          {
@@ -306,13 +304,11 @@ void dealerLogic()
             // player wins bet amount
             endGameTracking(gt, 2);
          }
-
       }
       break;
-      //dealerHand.push_back(drawCard());
+      // dealerHand.push_back(drawCard());
    }
    resetHand();
-
 }
 
 // Main gameplay loop that connects all the previous functions.
@@ -383,8 +379,8 @@ void Gameplay()
                   if (gt.amt < 5)
                   {
                      char c;
-                     cout<<"Minimum bet is $5. Would you like to buy back in?";
-                     cin>>c;
+                     cout << "Minimum bet is $5. Would you like to buy back in?";
+                     cin >> c;
                      while ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
                      {
                         if ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
@@ -408,7 +404,6 @@ void Gameplay()
                         MainMenu();
                      }
                      break;
-
                   }
                   resetHand();
                   placeBet(gt, betRange);
@@ -456,8 +451,8 @@ void Gameplay()
                if (gt.amt < 5)
                {
                   char c;
-                  cout<<"Minimum bet is $5. Would you like to buy back in?";
-                  cin>>c;
+                  cout << "Minimum bet is $5. Would you like to buy back in?";
+                  cin >> c;
                   while ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
                   {
                      if ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
@@ -481,7 +476,6 @@ void Gameplay()
                      MainMenu();
                   }
                   break;
-
                }
                resetHand();
                placeBet(gt, betRange);
@@ -517,8 +511,6 @@ void Gameplay()
       }
       break;
    }
-
-
 }
 
 void playAgainValid(char &again)
@@ -540,7 +532,6 @@ void displayHighScores()
    ifstream file("sv.txt");
    string line;
 
-
    if (!file.is_open())
    {
       cout << "No high scores yet!\n";
@@ -555,8 +546,6 @@ void displayHighScores()
    cout << "======================\n\n";
    file.close();
 }
-
-
 
 /********************************************/
 /*                 MENUS                    */
@@ -638,7 +627,7 @@ void MainMenu()
          cout << "Each players starts out with $25. You can bet a minimum of $5 and a maximum of $500 on each hand." << endl;
          cout << "If the player wins, your bet is doubled and returned to you. On a loss you lose your bet. On a push" << endl;
          cout << "(you and the dealer tie) you will have your bet returned to you at the same value." << endl;
-         cout << endl; //sky - added betting info
+         cout << endl; // sky - added betting info
 
          cout << "                   Please choose from the options below" << endl;
          cout << "                              1. Play Game\n"
