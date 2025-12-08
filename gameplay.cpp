@@ -223,8 +223,7 @@ void resetHand()
    dealerHand.push_back(drawCard());
 }
 
-// ASTON - this is probably the best spot to calculate wins?
-// I'll let you decide.
+
 // Dealer decisions based on certain criteria - wins/losses
 void dealerLogic()
 {
@@ -282,6 +281,7 @@ void dealerLogic()
          // logic = false;
 
          // player wins 1.5x bet
+         endGameTracking(gt, 2);
          break;
       }
       else if (dealerScore > 16)
@@ -294,6 +294,7 @@ void dealerLogic()
             displayHand(playerHand, true);
             cout << endl;
             // player loses bet amount
+
          }
          else
          {
@@ -303,18 +304,22 @@ void dealerLogic()
             displayHand(playerHand, true);
             cout << endl;
             // player wins bet amount
+            endGameTracking(gt, 2);
          }
-         break;
-      }
 
-      dealerHand.push_back(drawCard());
+      }
+      break;
+      //dealerHand.push_back(drawCard());
    }
+   resetHand();
+
 }
 
 // Main gameplay loop that connects all the previous functions.
 // allows player to make decisions and decide to play or quit. Bets are made here too
 void Gameplay()
 {
+
    char playAgain = 'y';
 
    gt = initTracking(betRange);
@@ -330,6 +335,7 @@ void Gameplay()
 
       while (loop)
       {
+
          // Show Dealer Hand
          calculateDealerHandValue();
          displayHand(dealerHand, false);
@@ -417,6 +423,26 @@ void Gameplay()
 
             if (playAgain == 'y' || playAgain == 'Y')
             {
+               if (gt.amt == 0)
+               {
+                  char c;
+                  cout<<"You are out of money. Would you like to buy back in?";
+                  cin>>c;
+                  if (c == 'y' || c == 'Y')
+                  {
+                     gt = initTracking(betRange);
+
+                     resetHand();
+                     placeBet(gt, betRange);
+                     statsTracking(gt);
+                  }
+                  else
+                  {
+                     MainMenu();
+                  }
+                  break;
+
+               }
                resetHand();
                placeBet(gt, betRange);
                statsTracking(gt);
@@ -491,7 +517,6 @@ void displayHighScores()
 /********************************************/
 /*                 MENUS                    */
 /********************************************/
-
 void MainMenu()
 {
    bool continueGame = true;
@@ -565,8 +590,11 @@ void MainMenu()
          cout << "must hit and continue to hit until their total reaches 17 or more, at which point they must stand." << endl;
          cout << "If the dealer has an ace, and counting it as an 11 would put them at 17 or more but under 21, then" << endl;
          cout << "the dealer must count it as an 11 and stand." << endl;
-         cout << endl;
-         // possibly add info about betting
+         cout << "BETTING:" << endl;
+         cout << "Each players starts out with $25. You can bet a minimum of $5 and a maximum of $500 on each hand." << endl;
+         cout << "If the player wins, your bet is doubled and returned to you. On a loss you lose your bet. On a push" << endl;
+         cout << "(you and the dealer tie) you will have your bet returned to you at the same value." << endl;
+         cout << endl; //sky - added betting info
 
          cout << "                   Please choose from the options below" << endl;
          cout << "                              1. Play Game\n"

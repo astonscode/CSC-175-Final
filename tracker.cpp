@@ -42,6 +42,7 @@ void statsTracking(tracker &t) // displays current stats
 void placeBet(tracker &t, vector<double> &b) // places a bet and validates input
 {
    double bet;
+   std::cout << "\nCurrent balance: $" << t.amt << endl;
    std::cout << "Place your bet (must be between $" << b[0] << " and $" << b[1] << "): $";
    cin >> bet;
    while (true)
@@ -104,4 +105,5 @@ void endGameTracking(tracker &t, double r) // ends tracking for a game based on 
 
    t.currentBet = 0;
    std::cout << "Your money: $" << t.amt << endl;
+   std::cout << "-----------------------------------" << endl; //sky - line was not showing up for each win/loss case
 }
