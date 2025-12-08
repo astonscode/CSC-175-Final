@@ -495,6 +495,10 @@ void Gameplay()
             cout << "-----------------------------------\n";
             loop = false;
             playAgain = 'n';
+            // Update activeUser with final money and save before returning to menu
+            activeUser.money = static_cast<int>(gt.amt);
+            updateUser(users, activeUser.name, activeUser.money);
+            saveUsers(users);
             break;
 
          default:
@@ -514,10 +518,7 @@ void Gameplay()
       break;
    }
 
-   // Update activeUser with final money and save before returning to menu
-   activeUser.money = static_cast<int>(gt.amt);
-   updateUser(users, activeUser.name, activeUser.money);
-   saveUsers(users);
+
 }
 
 void playAgainValid(char &again)
@@ -539,6 +540,7 @@ void displayHighScores()
    ifstream file("sv.txt");
    string line;
 
+
    if (!file.is_open())
    {
       cout << "No high scores yet!\n";
@@ -554,39 +556,7 @@ void displayHighScores()
    file.close();
 }
 
-void checkLowBalance()
-{
-   if (gt.amt < 5)
-   {
-      char c;
-      cout<<"Minimum bet is $5. Would you like to buy back in?";
-      cin>>c;
-      while ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
-      {
-         if ((c != 'y' && c != 'Y') && (c != 'n' && c != 'N'))
-         {
-            cin.clear();
-            cin.ignore(10000, '\n');
-            cout << "Invalid input, please try again.\n";
-            cin >> c;
-         }
-      }
-      if (c == 'y' || c == 'Y')
-      {
-         gt = initTracking(betRange);
 
-         resetHand();
-         placeBet(gt, betRange);
-         statsTracking(gt);
-      }
-      else
-      {
-         MainMenu();
-      }
-      //break;
-
-   }
-}
 
 /********************************************/
 /*                 MENUS                    */
