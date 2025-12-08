@@ -308,7 +308,7 @@ void dealerLogic()
       break;
       // dealerHand.push_back(drawCard());
    }
-   resetHand();
+   //resetHand();
 }
 
 // Main gameplay loop that connects all the previous functions.
