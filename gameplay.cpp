@@ -409,6 +409,10 @@ void Gameplay()
                   placeBet(gt, betRange);
                   statsTracking(gt);
                }
+               else
+               {
+                  MainMenu();
+               }
 
                continue;
             }
