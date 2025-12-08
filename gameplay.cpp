@@ -306,7 +306,7 @@ void dealerLogic()
          }
       }
       break;
-      // dealerHand.push_back(drawCard());
+      // dealerHand.push_back(drawCard()); s
    }
    resetHand();
 }
